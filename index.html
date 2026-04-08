@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brain Stroke Detection</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #5f9cff, #8e44ad);
+            text-align: center;
+            color: black;
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px;
+            margin: 80px auto;
+            width: 400px;
+            border-radius: 15px;
+        }
+
+        button {
+            background: green;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        img {
+            margin-top: 15px;
+            border-radius: 10px;
+        }
+
+        .result-box {
+            background: #dfeee0;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>🧠 Brain Stroke Detection and Classification System</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if image %}
+        <h3>Uploaded Image:</h3>
+        <img src="data:image/png;base64,{{ image }}" width="250">
+    {% endif %}
+
+    {% if result %}
+    <div class="result-box">
+        <h3>Prediction: {{ result }}</h3>
+        <p>Confidence: {{ confidence }}%</p>
+
+        <h4>All Probabilities:</h4>
+        <p>Hemorrhagic: {{ probs['Hemorrhagic'] }}%</p>
+        <p>Ischemic: {{ probs['Ischemic'] }}%</p>
+        <p>Normal: {{ probs['Normal'] }}%</p>
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
